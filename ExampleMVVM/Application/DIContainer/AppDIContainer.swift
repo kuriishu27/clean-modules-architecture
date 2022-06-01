@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class AppDIContainer {
+public final class AppDIContainer {
     
     lazy var appConfiguration = AppConfiguration()
     
@@ -25,6 +25,8 @@ final class AppDIContainer {
         let imagesDataNetwork = DefaultNetworkService(config: config)
         return DefaultDataTransferService(with: imagesDataNetwork)
     }()
+	
+	public init() {}
     
     // MARK: - DIContainers of scenes
     func makeMoviesSceneDIContainer() -> MoviesSceneDIContainer {
