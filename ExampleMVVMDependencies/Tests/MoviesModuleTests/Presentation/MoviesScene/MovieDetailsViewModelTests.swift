@@ -6,8 +6,10 @@
 //
 
 import XCTest
+@testable import Common
+@testable import MoviesModule
 
-class MovieDetailsViewModelTests: XCTestCase {
+final class MovieDetailsViewModelTests: XCTestCase {
     
     private enum PosterImageDowloadError: Error {
         case someError

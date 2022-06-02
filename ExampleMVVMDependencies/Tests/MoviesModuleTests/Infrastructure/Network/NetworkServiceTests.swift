@@ -6,6 +6,7 @@
 //
 
 import XCTest
+@testable import Common
 
 class NetworkServiceTests: XCTestCase {
     

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+@testable import Common
 
 class NetworkConfigurableMock: NetworkConfigurable {
     var baseURL: URL = URL(string: "https://mock.test.com")!

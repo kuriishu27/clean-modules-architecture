@@ -6,8 +6,10 @@
 //
 
 import XCTest
+@testable import Common
+@testable import MoviesModule
 
-class SearchMoviesUseCaseTests: XCTestCase {
+final class SearchMoviesUseCaseTests: XCTestCase {
     
     static let moviesPages: [MoviesPage] = {
         let page1 = MoviesPage(page: 1, totalPages: 2, movies: [

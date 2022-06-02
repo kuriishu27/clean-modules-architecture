@@ -6,6 +6,7 @@
 //
 
 import XCTest
+@testable import Common
 
 private struct MockModel: Decodable {
     let name: String

@@ -29,5 +29,7 @@ let package = Package(
 		.target(
 			name: "MoviesModule",
 			dependencies: ["Common", "Persistence"]),
+		.testTarget(name: "MoviesModuleTests",
+								dependencies: ["Common", "MoviesModule"])
 	]
 )

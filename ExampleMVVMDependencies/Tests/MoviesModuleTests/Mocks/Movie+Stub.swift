@@ -6,8 +6,9 @@
 //
 
 import Foundation
+@testable import MoviesModule
 
-extension Movie {
+public extension Movie {
     static func stub(id: Movie.Identifier = "id1",
                 title: String = "title1" ,
                 genre: Movie.Genre = .adventure,

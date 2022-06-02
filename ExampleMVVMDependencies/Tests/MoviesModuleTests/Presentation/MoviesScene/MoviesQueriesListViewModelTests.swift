@@ -7,8 +7,27 @@
 
 @testable import ExampleMVVM
 import XCTest
+@testable import Common
+@testable import MoviesModule
 
-class MoviesQueriesListViewModelTests: XCTestCase {
+final class FetchRecentMovieQueriesUseCaseMock: UseCase {
+		var expectation: XCTestExpectation?
+		var error: Error?
+		var movieQueries: [MovieQuery] = []
+		var completion: (Result<[MovieQuery], Error>) -> Void = { _ in }
+
+		func start() -> Cancellable? {
+				if let error = error {
+						completion(.failure(error))
+				} else {
+						completion(.success(movieQueries))
+				}
+				expectation?.fulfill()
+				return nil
+		}
+}
+
+final class MoviesQueriesListViewModelTests: XCTestCase {
     
     private enum FetchRecentQueriedUseCase: Error {
         case someError
@@ -19,23 +38,6 @@ class MoviesQueriesListViewModelTests: XCTestCase {
                         MovieQuery(query: "query3"),
                         MovieQuery(query: "query4"),
                         MovieQuery(query: "query5")]
-
-    class FetchRecentMovieQueriesUseCaseMock: UseCase {
-        var expectation: XCTestExpectation?
-        var error: Error?
-        var movieQueries: [MovieQuery] = []
-        var completion: (Result<[MovieQuery], Error>) -> Void = { _ in }
-
-        func start() -> Cancellable? {
-            if let error = error {
-                completion(.failure(error))
-            } else {
-                completion(.success(movieQueries))
-            }
-            expectation?.fulfill()
-            return nil
-        }
-    }
 
     func makeFetchRecentMovieQueriesUseCase(_ mock: FetchRecentMovieQueriesUseCaseMock) -> FetchRecentMovieQueriesUseCaseFactory {
         return { _, completion in

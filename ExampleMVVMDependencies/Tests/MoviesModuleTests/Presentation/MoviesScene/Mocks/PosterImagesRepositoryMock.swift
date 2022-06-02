@@ -7,8 +7,10 @@
 
 import Foundation
 import XCTest
+@testable import Common
+@testable import MoviesModule
 
-class PosterImagesRepositoryMock: PosterImagesRepository {
+final class PosterImagesRepositoryMock: PosterImagesRepository {
     var expectation: XCTestExpectation?
     var error: Error?
     var image = Data()

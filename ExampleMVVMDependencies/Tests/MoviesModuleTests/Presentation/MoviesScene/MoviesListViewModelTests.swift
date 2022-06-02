@@ -6,6 +6,8 @@
 //
 
 import XCTest
+@testable import Common
+@testable import MoviesModule
 
 class MoviesListViewModelTests: XCTestCase {
     
