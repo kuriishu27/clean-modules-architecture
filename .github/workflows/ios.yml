@@ -34,6 +34,6 @@ jobs:
           xcodebuild build-for-testing test-without-building \
           -workspace ExampleMVVM.xcworkspace \
           -scheme "MoviesModuleTests" \
-          -destination "platform=$platform,name=$device" \
+          -destination "platform=$platform,name=iPhone 13" \
           CODE_SIGN_IDENTITY="" \
           CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
