@@ -26,7 +26,11 @@ public final class MoviesListViewController: UIViewController, StoryboardInstant
 
     static func create(with viewModel: MoviesListViewModel,
                        posterImagesRepository: PosterImagesRepository?) -> MoviesListViewController {
-        let view = MoviesListViewController.instantiateViewController()
+			let view = UIStoryboard(
+				name: "MoviesListViewController",
+				bundle: .module
+			).instantiateInitialViewController() as! MoviesListViewController
+			
         view.viewModel = viewModel
         view.posterImagesRepository = posterImagesRepository
         return view

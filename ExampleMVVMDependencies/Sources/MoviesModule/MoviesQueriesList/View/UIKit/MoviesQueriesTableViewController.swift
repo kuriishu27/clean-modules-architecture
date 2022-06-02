@@ -8,14 +8,14 @@
 import UIKit
 import Common
 
-public final class MoviesQueriesTableViewController: UITableViewController, StoryboardInstantiable {
+public final class MoviesQueriesTableViewController: UITableViewController {
     
     private var viewModel: MoviesQueryListViewModel!
 
     // MARK: - Lifecycle
 
     static func create(with viewModel: MoviesQueryListViewModel) -> MoviesQueriesTableViewController {
-        let view = MoviesQueriesTableViewController.instantiateViewController()
+			let view = UIStoryboard(name: "MoviesQueriesTableViewController", bundle: .module).instantiateViewController(withIdentifier: "MoviesQueriesTableViewController") as! MoviesQueriesTableViewController
         view.viewModel = viewModel
         return view
     }

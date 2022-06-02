@@ -19,7 +19,7 @@ final class MovieDetailsViewController: UIViewController, StoryboardInstantiable
     private var viewModel: MovieDetailsViewModel!
     
     static func create(with viewModel: MovieDetailsViewModel) -> MovieDetailsViewController {
-        let view = MovieDetailsViewController.instantiateViewController()
+			let view = UIStoryboard(name: "MovieDetailsViewController", bundle: .module).instantiateViewController(withIdentifier: "MovieDetailsViewControllerID") as! MovieDetailsViewController
         view.viewModel = viewModel
         return view
     }

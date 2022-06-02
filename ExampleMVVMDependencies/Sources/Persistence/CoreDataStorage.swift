@@ -28,7 +28,7 @@ public final class CoreDataStorage {
 	
 	// MARK: - Core Data stack
 	private lazy var persistentContainer: PersistentContainer? = {
-		guard let modelURL = Bundle.module.url(forResource:"Persistence", withExtension: "momd") else { return nil }
+		guard let modelURL = Bundle.module.url(forResource:"CoreDataStorage", withExtension: "momd") else { return nil }
 		
 		guard let model = NSManagedObjectModel(contentsOf: modelURL) else { return nil }
 		let container = PersistentContainer(
