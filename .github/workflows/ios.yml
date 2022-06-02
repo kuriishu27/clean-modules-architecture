@@ -2,9 +2,9 @@ name: iOS starter workflow
 
 on:
   push:
-    branches: [ clean-modules ]
+    branches: [ ${GITHUB_REF##*/} ]
   pull_request:
-    branches: [ clean-modules ]
+    branches: [ ${GITHUB_REF##*/} ]
 
 jobs:
   build:
