@@ -23,8 +23,8 @@
 		1FA53A3922F45CD9009A104C /* SearchMoviesUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA53A3822F45CD5009A104C /* SearchMoviesUseCaseTests.swift */; };
 		1FF082B3239438DC00876A22 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1FF082B5239438DC00876A22 /* Localizable.strings */; };
 		1FF082B923944E7800876A22 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1FF082B5239438DC00876A22 /* Localizable.strings */; };
+		4767F7E62848D29E00799AC6 /* AppDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B20BB12847B52F0066A566 /* AppDIContainer.swift */; };
 		B9B20BA82847AC740066A566 /* Common in Frameworks */ = {isa = PBXBuildFile; productRef = B9B20BA72847AC740066A566 /* Common */; };
-		B9B20BAC2847B4D40066A566 /* CoreDataStorage in Frameworks */ = {isa = PBXBuildFile; productRef = B9B20BAB2847B4D40066A566 /* CoreDataStorage */; };
 		B9B20BAE2847B4F00066A566 /* MoviesModule in Frameworks */ = {isa = PBXBuildFile; productRef = B9B20BAD2847B4F00066A566 /* MoviesModule */; };
 		B9B20BB32847B52F0066A566 /* AppFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B20BB22847B52F0066A566 /* AppFlowCoordinator.swift */; };
 		B9B20BB42847B52F0066A566 /* AppConfigurations.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B20BAF2847B52F0066A566 /* AppConfigurations.swift */; };
@@ -75,7 +75,6 @@
 		B9B20BAF2847B52F0066A566 /* AppConfigurations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigurations.swift; sourceTree = "<group>"; };
 		B9B20BB12847B52F0066A566 /* AppDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDIContainer.swift; sourceTree = "<group>"; };
 		B9B20BB22847B52F0066A566 /* AppFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFlowCoordinator.swift; sourceTree = "<group>"; };
-		B9B20BB52847B8870066A566 /* Persistence */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Persistence; sourceTree = "<group>"; };
 		FC2B715B2156FF93002BD59E /* AppAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAppearance.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -93,7 +92,6 @@
 			files = (
 				B9B20BA82847AC740066A566 /* Common in Frameworks */,
 				B9B20BAE2847B4F00066A566 /* MoviesModule in Frameworks */,
-				B9B20BAC2847B4D40066A566 /* CoreDataStorage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -130,13 +128,6 @@
 				1F02DE3422F8507500E40C3A /* MoviesSceneUITests.swift */,
 			);
 			path = MoviesScene;
-			sourceTree = "<group>";
-		};
-		1F1FC48422E3693100BCBA8D /* Network */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Network;
 			sourceTree = "<group>";
 		};
 		1F7C1D1A242117D30014F011 /* Mocks */ = {
@@ -206,7 +197,6 @@
 		1FA53380201E1FDE00747E55 = {
 			isa = PBXGroup;
 			children = (
-				B9B20BB52847B8870066A566 /* Persistence */,
 				1FA5338B201E1FDE00747E55 /* ExampleMVVM */,
 				1FA533A0201E1FDE00747E55 /* ExampleMVVMTests */,
 				1F02DE3322F8507500E40C3A /* ExampleMVVMUITests */,
@@ -229,8 +219,6 @@
 			isa = PBXGroup;
 			children = (
 				1FA533D5201EF29600747E55 /* Application */,
-				1FEED0D320231D93000F4EAA /* Infrastructure */,
-				1FEED0D520231F72000F4EAA /* Common */,
 				1FA533AD201E205000747E55 /* Resources */,
 			);
 			path = ExampleMVVM;
@@ -266,6 +254,7 @@
 				B9B20BB02847B52F0066A566 /* DIContainer */,
 				B9B20BAF2847B52F0066A566 /* AppConfigurations.swift */,
 				B9B20BB22847B52F0066A566 /* AppFlowCoordinator.swift */,
+				B9B20BB12847B52F0066A566 /* AppDIContainer.swift */,
 				1FA5338C201E1FDE00747E55 /* AppDelegate.swift */,
 				FC2B715B2156FF93002BD59E /* AppAppearance.swift */,
 			);
@@ -289,21 +278,6 @@
 			path = UseCases;
 			sourceTree = "<group>";
 		};
-		1FEED0D320231D93000F4EAA /* Infrastructure */ = {
-			isa = PBXGroup;
-			children = (
-				1F1FC48422E3693100BCBA8D /* Network */,
-			);
-			path = Infrastructure;
-			sourceTree = "<group>";
-		};
-		1FEED0D520231F72000F4EAA /* Common */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Common;
-			sourceTree = "<group>";
-		};
 		B9B20BA62847AC740066A566 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -314,7 +288,6 @@
 		B9B20BB02847B52F0066A566 /* DIContainer */ = {
 			isa = PBXGroup;
 			children = (
-				B9B20BB12847B52F0066A566 /* AppDIContainer.swift */,
 			);
 			path = DIContainer;
 			sourceTree = "<group>";
@@ -355,7 +328,6 @@
 			name = ExampleMVVM;
 			packageProductDependencies = (
 				B9B20BA72847AC740066A566 /* Common */,
-				B9B20BAB2847B4D40066A566 /* CoreDataStorage */,
 				B9B20BAD2847B4F00066A566 /* MoviesModule */,
 			);
 			productName = CodeChallenge;
@@ -469,6 +441,7 @@
 			files = (
 				FC2B715C2156FF93002BD59E /* AppAppearance.swift in Sources */,
 				B9B20BB32847B52F0066A566 /* AppFlowCoordinator.swift in Sources */,
+				4767F7E62848D29E00799AC6 /* AppDIContainer.swift in Sources */,
 				B9B20BB42847B52F0066A566 /* AppConfigurations.swift in Sources */,
 				1FA5338D201E1FDE00747E55 /* AppDelegate.swift in Sources */,
 			);
@@ -833,10 +806,6 @@
 		B9B20BA72847AC740066A566 /* Common */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Common;
-		};
-		B9B20BAB2847B4D40066A566 /* CoreDataStorage */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = CoreDataStorage;
 		};
 		B9B20BAD2847B4F00066A566 /* MoviesModule */ = {
 			isa = XCSwiftPackageProductDependency;

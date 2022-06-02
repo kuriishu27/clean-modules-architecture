@@ -6,8 +6,10 @@
 //
 
 import Foundation
+import Common
+import MoviesModule
 
-public final class AppDIContainer {
+final class AppDIContainer {
     
     lazy var appConfiguration = AppConfiguration()
     
@@ -25,8 +27,6 @@ public final class AppDIContainer {
         let imagesDataNetwork = DefaultNetworkService(config: config)
         return DefaultDataTransferService(with: imagesDataNetwork)
     }()
-	
-	public init() {}
     
     // MARK: - DIContainers of scenes
     func makeMoviesSceneDIContainer() -> MoviesSceneDIContainer {

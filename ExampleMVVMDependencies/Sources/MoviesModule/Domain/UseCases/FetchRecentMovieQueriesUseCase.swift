@@ -29,7 +29,7 @@ final class FetchRecentMovieQueriesUseCase: UseCase {
         self.moviesQueriesRepository = moviesQueriesRepository
     }
     
-    func start() -> Cancellable? {
+	public func start() -> Cancellable? {
 
         moviesQueriesRepository.fetchRecentsQueries(maxCount: requestValue.maxCount, completion: completion)
         return nil

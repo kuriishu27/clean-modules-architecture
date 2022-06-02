@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import CoreDataStorage
+import Persistence
 
 protocol MoviesResponseStorage {
     func getResponse(for request: MoviesRequestDTO, completion: @escaping (Result<MoviesResponseDTO?, CoreDataStorageError>) -> Void)

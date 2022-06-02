@@ -7,8 +7,9 @@
 
 import Foundation
 import CoreData
+import Persistence
 
-extension MovieQueryEntity {
+public extension MovieQueryEntity {
     convenience init(movieQuery: MovieQuery, insertInto context: NSManagedObjectContext) {
         self.init(context: context)
         query = movieQuery.query
@@ -16,7 +17,7 @@ extension MovieQueryEntity {
     }
 }
 
-extension MovieQueryEntity {
+public extension MovieQueryEntity {
     func toDomain() -> MovieQuery {
         return .init(query: query ?? "")
     }

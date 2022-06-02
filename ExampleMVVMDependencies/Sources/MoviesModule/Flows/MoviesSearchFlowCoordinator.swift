@@ -13,7 +13,7 @@ protocol MoviesSearchFlowCoordinatorDependencies  {
     func makeMoviesQueriesSuggestionsListViewController(didSelect: @escaping MoviesQueryListViewModelDidSelectAction) -> UIViewController
 }
 
-final class MoviesSearchFlowCoordinator {
+public final class MoviesSearchFlowCoordinator {
     
     private weak var navigationController: UINavigationController?
     private let dependencies: MoviesSearchFlowCoordinatorDependencies
@@ -27,7 +27,7 @@ final class MoviesSearchFlowCoordinator {
         self.dependencies = dependencies
     }
     
-    func start() {
+	public func start() {
         // Note: here we keep strong reference with actions, this way this flow do not need to be strong referenced
         let actions = MoviesListViewModelActions(showMovieDetails: showMovieDetails,
                                                  showMovieQueriesSuggestions: showMovieQueriesSuggestions,

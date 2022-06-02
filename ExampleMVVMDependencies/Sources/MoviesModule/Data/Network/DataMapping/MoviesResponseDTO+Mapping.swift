@@ -10,7 +10,7 @@ import Foundation
 
 // MARK: - Data Transfer Object
 
-struct MoviesResponseDTO: Decodable {
+public struct MoviesResponseDTO: Decodable {
     private enum CodingKeys: String, CodingKey {
         case page
         case totalPages = "total_pages"
@@ -21,7 +21,7 @@ struct MoviesResponseDTO: Decodable {
     let movies: [MovieDTO]
 }
 
-extension MoviesResponseDTO {
+public extension MoviesResponseDTO {
     struct MovieDTO: Decodable {
         private enum CodingKeys: String, CodingKey {
             case id
@@ -31,7 +31,7 @@ extension MoviesResponseDTO {
             case overview
             case releaseDate = "release_date"
         }
-        enum GenreDTO: String, Decodable {
+			public enum GenreDTO: String, Decodable {
             case adventure
             case scienceFiction = "science_fiction"
         }
@@ -46,7 +46,7 @@ extension MoviesResponseDTO {
 
 // MARK: - Mappings to Domain
 
-extension MoviesResponseDTO {
+public extension MoviesResponseDTO {
     func toDomain() -> MoviesPage {
         return .init(page: page,
                      totalPages: totalPages,
@@ -54,7 +54,7 @@ extension MoviesResponseDTO {
     }
 }
 
-extension MoviesResponseDTO.MovieDTO {
+public extension MoviesResponseDTO.MovieDTO {
     func toDomain() -> Movie {
         return .init(id: Movie.Identifier(id),
                      title: title,
@@ -65,7 +65,7 @@ extension MoviesResponseDTO.MovieDTO {
     }
 }
 
-extension MoviesResponseDTO.MovieDTO.GenreDTO {
+public extension MoviesResponseDTO.MovieDTO.GenreDTO {
     func toDomain() -> Movie.Genre {
         switch self {
         case .adventure: return .adventure

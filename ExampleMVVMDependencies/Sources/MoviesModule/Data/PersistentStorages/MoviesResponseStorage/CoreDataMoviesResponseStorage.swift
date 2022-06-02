@@ -6,8 +6,8 @@
 //
 
 import Foundation
-import CoreDataStorage
 import CoreData
+import Persistence
 
 final class CoreDataMoviesResponseStorage {
 

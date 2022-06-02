@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import CoreDataStorage
+import Persistence
 import CoreData
 
 final class CoreDataMoviesQueriesStorage {

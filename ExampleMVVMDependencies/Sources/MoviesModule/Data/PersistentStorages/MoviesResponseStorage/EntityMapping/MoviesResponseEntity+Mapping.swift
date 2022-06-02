@@ -7,6 +7,7 @@
 
 import Foundation
 import CoreData
+import Persistence
 
 extension MoviesResponseEntity {
     func toDTO() -> MoviesResponseDTO {
