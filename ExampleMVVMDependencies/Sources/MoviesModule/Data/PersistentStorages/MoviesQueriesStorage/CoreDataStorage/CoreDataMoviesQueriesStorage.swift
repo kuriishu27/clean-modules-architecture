@@ -5,12 +5,11 @@
 //  Created by Oleh Kudinov on 16.08.19.
 //
 
+import CoreData
 import Foundation
 import Persistence
-import CoreData
 
 final class CoreDataMoviesQueriesStorage {
-
     private let maxStorageLimit: Int
     private let coreDataStorage: CoreDataStorage
 
@@ -21,9 +20,7 @@ final class CoreDataMoviesQueriesStorage {
 }
 
 extension CoreDataMoviesQueriesStorage: MoviesQueriesStorage {
-    
     func fetchRecentsQueries(maxCount: Int, completion: @escaping (Result<[MovieQuery], Error>) -> Void) {
-        
         coreDataStorage.performBackgroundTask { context in
             do {
                 let request: NSFetchRequest = MovieQueryEntity.fetchRequest()
@@ -38,9 +35,8 @@ extension CoreDataMoviesQueriesStorage: MoviesQueriesStorage {
             }
         }
     }
-    
-    func saveRecentQuery(query: MovieQuery, completion: @escaping (Result<MovieQuery, Error>) -> Void) {
 
+    func saveRecentQuery(query: MovieQuery, completion: @escaping (Result<MovieQuery, Error>) -> Void) {
         coreDataStorage.performBackgroundTask { [weak self] context in
             guard let self = self else { return }
             do {
@@ -57,8 +53,8 @@ extension CoreDataMoviesQueriesStorage: MoviesQueriesStorage {
 }
 
 // MARK: - Private
-extension CoreDataMoviesQueriesStorage {
 
+extension CoreDataMoviesQueriesStorage {
     private func cleanUpQueries(for query: MovieQuery, inContext context: NSManagedObjectContext) throws {
         let request: NSFetchRequest = MovieQueryEntity.fetchRequest()
         request.sortDescriptors = [NSSortDescriptor(key: #keyPath(MovieQueryEntity.createdAt),

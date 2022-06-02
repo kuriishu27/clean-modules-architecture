@@ -8,7 +8,6 @@
 import UIKit
 
 final class MoviesListTableViewController: UITableViewController {
-
     var viewModel: MoviesListViewModel!
 
     var posterImagesRepository: PosterImagesRepository?
@@ -47,14 +46,14 @@ final class MoviesListTableViewController: UITableViewController {
 // MARK: - UITableViewDataSource, UITableViewDelegate
 
 extension MoviesListTableViewController {
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
         return viewModel.items.value.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: MoviesListItemCell.reuseIdentifier,
-                                                       for: indexPath) as? MoviesListItemCell else {
+                                                       for: indexPath) as? MoviesListItemCell
+        else {
             assertionFailure("Cannot dequeue reusable cell \(MoviesListItemCell.self) with reuseIdentifier: \(MoviesListItemCell.reuseIdentifier)")
             return UITableViewCell()
         }
@@ -73,7 +72,7 @@ extension MoviesListTableViewController {
         return viewModel.isEmpty ? tableView.frame.height : super.tableView(tableView, heightForRowAt: indexPath)
     }
 
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    override func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
         viewModel.didSelectItem(at: indexPath.row)
     }
 }

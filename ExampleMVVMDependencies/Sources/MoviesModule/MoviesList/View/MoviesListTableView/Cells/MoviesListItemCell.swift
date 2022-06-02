@@ -5,11 +5,10 @@
 //  Created by Oleh Kudinov on 01.10.18.
 //
 
-import UIKit
 import Common
+import UIKit
 
 public final class MoviesListItemCell: UITableViewCell {
-
     static let reuseIdentifier = String(describing: MoviesListItemCell.self)
     static let height = CGFloat(130)
 

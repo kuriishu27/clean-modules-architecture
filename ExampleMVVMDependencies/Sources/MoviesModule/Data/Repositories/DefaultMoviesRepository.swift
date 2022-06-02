@@ -6,11 +6,10 @@
 //
 // **Note**: DTOs structs are mapped into Domains here, and Repository protocols does not contain DTOs
 
-import Foundation
 import Common
+import Foundation
 
 final class DefaultMoviesRepository {
-
     private let dataTransferService: DataTransferService
     private let cache: MoviesResponseStorage
 
@@ -21,11 +20,10 @@ final class DefaultMoviesRepository {
 }
 
 extension DefaultMoviesRepository: MoviesRepository {
-
     public func fetchMoviesList(query: MovieQuery, page: Int,
                                 cached: @escaping (MoviesPage) -> Void,
-                                completion: @escaping (Result<MoviesPage, Error>) -> Void) -> Cancellable? {
-
+                                completion: @escaping (Result<MoviesPage, Error>) -> Void) -> Cancellable?
+    {
         let requestDTO = MoviesRequestDTO(query: query.query, page: page)
         let task = RepositoryTask()
 
@@ -39,10 +37,10 @@ extension DefaultMoviesRepository: MoviesRepository {
             let endpoint = APIEndpoints.getMovies(with: requestDTO)
             task.networkTask = self.dataTransferService.request(with: endpoint) { result in
                 switch result {
-                case .success(let responseDTO):
+                case let .success(responseDTO):
                     self.cache.save(response: responseDTO, for: requestDTO)
                     completion(.success(responseDTO.toDomain()))
-                case .failure(let error):
+                case let .failure(error):
                     completion(.failure(error))
                 }
             }

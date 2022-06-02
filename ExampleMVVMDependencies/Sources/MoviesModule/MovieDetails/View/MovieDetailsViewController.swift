@@ -6,24 +6,23 @@
 //  Copyright (c) 2019 All rights reserved.
 //
 
-import UIKit
 import Common
+import UIKit
 
 final class MovieDetailsViewController: UIViewController, StoryboardInstantiable {
-
     @IBOutlet private var posterImageView: UIImageView!
     @IBOutlet private var overviewTextView: UITextView!
 
     // MARK: - Lifecycle
 
     private var viewModel: MovieDetailsViewModel!
-    
+
     static func create(with viewModel: MovieDetailsViewModel) -> MovieDetailsViewController {
-			let view = UIStoryboard(name: "MovieDetailsViewController", bundle: .module).instantiateViewController(withIdentifier: "MovieDetailsViewControllerID") as! MovieDetailsViewController
+        let view = UIStoryboard(name: "MovieDetailsViewController", bundle: .module).instantiateViewController(withIdentifier: "MovieDetailsViewControllerID") as! MovieDetailsViewController
         view.viewModel = viewModel
         return view
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
@@ -33,7 +32,7 @@ final class MovieDetailsViewController: UIViewController, StoryboardInstantiable
     private func bind(to viewModel: MovieDetailsViewModel) {
         viewModel.posterImage.observe(on: self) { [weak self] in self?.posterImageView.image = $0.flatMap(UIImage.init) }
     }
-    
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         viewModel.updatePosterImage(width: Int(posterImageView.imageSizeAfterAspectFit.scaledSize.width))

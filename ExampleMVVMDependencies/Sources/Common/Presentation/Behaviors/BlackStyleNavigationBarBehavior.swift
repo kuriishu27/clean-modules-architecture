@@ -8,11 +8,9 @@
 import UIKit
 
 public struct BlackStyleNavigationBarBehavior: ViewControllerLifecycleBehavior {
-
     public func viewDidLoad(viewController: UIViewController) {
-
         viewController.navigationController?.navigationBar.barStyle = .black
     }
-	
-	public init(){}
+
+    public init() {}
 }

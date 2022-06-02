@@ -5,8 +5,8 @@
 //  Created by Oleh Kudinov on 01.10.18.
 //
 
-import Foundation
 import Common
+import Foundation
 
 struct MoviesListViewModelActions {
     /// Note: if you would need to edit movie inside Details screen and update this Movies List screen with updated movie then you would need this closure:
@@ -46,7 +46,6 @@ protocol MoviesListViewModelOutput {
 protocol MoviesListViewModel: MoviesListViewModelInput, MoviesListViewModelOutput {}
 
 final class DefaultMoviesListViewModel: MoviesListViewModel {
-
     private let searchMoviesUseCase: SearchMoviesUseCase
     private let actions: MoviesListViewModelActions?
 
@@ -73,7 +72,8 @@ final class DefaultMoviesListViewModel: MoviesListViewModel {
     // MARK: - Init
 
     init(searchMoviesUseCase: SearchMoviesUseCase,
-         actions: MoviesListViewModelActions? = nil) {
+         actions: MoviesListViewModelActions? = nil)
+    {
         self.searchMoviesUseCase = searchMoviesUseCase
         self.actions = actions
     }
@@ -107,13 +107,14 @@ final class DefaultMoviesListViewModel: MoviesListViewModel {
             cached: appendPage,
             completion: { result in
                 switch result {
-                case .success(let page):
+                case let .success(page):
                     self.appendPage(page)
-                case .failure(let error):
+                case let .failure(error):
                     self.handle(error: error)
                 }
                 self.loading.value = .none
-        })
+            }
+        )
     }
 
     private func handle(error: Error) {
@@ -131,8 +132,7 @@ final class DefaultMoviesListViewModel: MoviesListViewModel {
 // MARK: - INPUT. View event methods
 
 extension DefaultMoviesListViewModel {
-
-    func viewDidLoad() { }
+    func viewDidLoad() {}
 
     func didLoadNextPage() {
         guard hasMorePages, loading.value == .none else { return }

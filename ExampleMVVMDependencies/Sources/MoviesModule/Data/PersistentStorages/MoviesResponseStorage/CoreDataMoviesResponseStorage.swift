@@ -5,12 +5,11 @@
 //  Created by Oleh Kudinov on 05/04/2020.
 //
 
-import Foundation
 import CoreData
+import Foundation
 import Persistence
 
 final class CoreDataMoviesResponseStorage {
-
     private let coreDataStorage: CoreDataStorage
 
     init(coreDataStorage: CoreDataStorage = CoreDataStorage.shared) {
@@ -41,7 +40,6 @@ final class CoreDataMoviesResponseStorage {
 }
 
 extension CoreDataMoviesResponseStorage: MoviesResponseStorage {
-
     func getResponse(for requestDto: MoviesRequestDTO, completion: @escaping (Result<MoviesResponseDTO?, CoreDataStorageError>) -> Void) {
         coreDataStorage.performBackgroundTask { context in
             do {

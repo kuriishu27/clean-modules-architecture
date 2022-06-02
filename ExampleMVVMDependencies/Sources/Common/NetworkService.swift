@@ -19,17 +19,17 @@ public protocol NetworkCancellable {
     func cancel()
 }
 
-extension URLSessionTask: NetworkCancellable { }
+extension URLSessionTask: NetworkCancellable {}
 
 public protocol NetworkService {
     typealias CompletionHandler = (Result<Data?, NetworkError>) -> Void
-    
+
     func request(endpoint: Requestable, completion: @escaping CompletionHandler) -> NetworkCancellable?
 }
 
 public protocol NetworkSessionManager {
     typealias CompletionHandler = (Data?, URLResponse?, Error?) -> Void
-    
+
     func request(_ request: URLRequest,
                  completion: @escaping CompletionHandler) -> NetworkCancellable
 }
@@ -43,23 +43,22 @@ public protocol NetworkErrorLogger {
 // MARK: - Implementation
 
 public final class DefaultNetworkService {
-    
     private let config: NetworkConfigurable
     private let sessionManager: NetworkSessionManager
     private let logger: NetworkErrorLogger
-    
+
     public init(config: NetworkConfigurable,
                 sessionManager: NetworkSessionManager = DefaultNetworkSessionManager(),
-                logger: NetworkErrorLogger = DefaultNetworkErrorLogger()) {
+                logger: NetworkErrorLogger = DefaultNetworkErrorLogger())
+    {
         self.sessionManager = sessionManager
         self.config = config
         self.logger = logger
     }
-    
+
     private func request(request: URLRequest, completion: @escaping CompletionHandler) -> NetworkCancellable {
-        
         let sessionDataTask = sessionManager.request(request) { data, response, requestError in
-            
+
             if let requestError = requestError {
                 var error: NetworkError
                 if let response = response as? HTTPURLResponse {
@@ -67,7 +66,7 @@ public final class DefaultNetworkService {
                 } else {
                     error = self.resolve(error: requestError)
                 }
-                
+
                 self.logger.log(error: error)
                 completion(.failure(error))
             } else {
@@ -75,12 +74,12 @@ public final class DefaultNetworkService {
                 completion(.success(data))
             }
         }
-    
+
         logger.log(request: request)
 
         return sessionDataTask
     }
-    
+
     private func resolve(error: Error) -> NetworkError {
         let code = URLError.Code(rawValue: (error as NSError).code)
         switch code {
@@ -92,7 +91,6 @@ public final class DefaultNetworkService {
 }
 
 extension DefaultNetworkService: NetworkService {
-    
     public func request(endpoint: Requestable, completion: @escaping CompletionHandler) -> NetworkCancellable? {
         do {
             let urlRequest = try endpoint.urlRequest(with: config)
@@ -105,6 +103,7 @@ extension DefaultNetworkService: NetworkService {
 }
 
 // MARK: - Default Network Session Manager
+
 // Note: If authorization is needed NetworkSessionManager can be implemented by using,
 // for example, Alamofire SessionManager with its RequestAdapter and RequestRetrier.
 // And it can be incjected into NetworkService instead of default one.
@@ -112,7 +111,8 @@ extension DefaultNetworkService: NetworkService {
 public class DefaultNetworkSessionManager: NetworkSessionManager {
     public init() {}
     public func request(_ request: URLRequest,
-                        completion: @escaping CompletionHandler) -> NetworkCancellable {
+                        completion: @escaping CompletionHandler) -> NetworkCancellable
+    {
         let task = URLSession.shared.dataTask(with: request, completionHandler: completion)
         task.resume()
         return task
@@ -122,7 +122,7 @@ public class DefaultNetworkSessionManager: NetworkSessionManager {
 // MARK: - Logger
 
 public final class DefaultNetworkErrorLogger: NetworkErrorLogger {
-    public init() { }
+    public init() {}
 
     public func log(request: URLRequest) {
         print("-------------")
@@ -136,7 +136,7 @@ public final class DefaultNetworkErrorLogger: NetworkErrorLogger {
         }
     }
 
-    public func log(responseData data: Data?, response: URLResponse?) {
+    public func log(responseData data: Data?, response _: URLResponse?) {
         guard let data = data else { return }
         if let dataDict = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
             printIfDebug("responseData: \(String(describing: dataDict))")
@@ -150,10 +150,10 @@ public final class DefaultNetworkErrorLogger: NetworkErrorLogger {
 
 // MARK: - NetworkError extension
 
-extension NetworkError {
-    public var isNotFoundError: Bool { return hasStatusCode(404) }
-    
-    public func hasStatusCode(_ codeError: Int) -> Bool {
+public extension NetworkError {
+    var isNotFoundError: Bool { return hasStatusCode(404) }
+
+    func hasStatusCode(_ codeError: Int) -> Bool {
         switch self {
         case let .error(code, _):
             return code == codeError
@@ -164,7 +164,7 @@ extension NetworkError {
 
 extension Dictionary where Key == String {
     func prettyPrint() -> String {
-        var string: String = ""
+        var string = ""
         if let data = try? JSONSerialization.data(withJSONObject: self, options: .prettyPrinted) {
             if let nstr = NSString(data: data, encoding: String.Encoding.utf8.rawValue) {
                 string = nstr as String
@@ -176,6 +176,6 @@ extension Dictionary where Key == String {
 
 func printIfDebug(_ string: String) {
     #if DEBUG
-    print(string)
+        print(string)
     #endif
 }

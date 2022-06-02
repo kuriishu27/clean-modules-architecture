@@ -4,32 +4,38 @@
 import PackageDescription
 
 let package = Package(
-	name: "ExampleMVVMDependencies",
-	platforms: [.iOS(.v15)],
-	products: [
-		.library(
-			name: "Common",
-			targets: ["Common"]),
-		.library(
-			name: "MoviesModule",
-			targets: ["MoviesModule"]),
-		.library(
-			name: "Persistence",
-			targets: ["Persistence"]),
-	],
-	dependencies: [
-	],
-	targets: [
-		.target(
-			name: "Common",
-			dependencies: []),
-		.target(
-			name: "Persistence",
-			dependencies: []),
-		.target(
-			name: "MoviesModule",
-			dependencies: ["Common", "Persistence"]),
-		.testTarget(name: "MoviesModuleTests",
-								dependencies: ["Common", "MoviesModule"])
-	]
+    name: "ExampleMVVMDependencies",
+    platforms: [.iOS(.v15)],
+    products: [
+        .library(
+            name: "Common",
+            targets: ["Common"]
+        ),
+        .library(
+            name: "MoviesModule",
+            targets: ["MoviesModule"]
+        ),
+        .library(
+            name: "Persistence",
+            targets: ["Persistence"]
+        ),
+    ],
+    dependencies: [
+    ],
+    targets: [
+        .target(
+            name: "Common",
+            dependencies: []
+        ),
+        .target(
+            name: "Persistence",
+            dependencies: []
+        ),
+        .target(
+            name: "MoviesModule",
+            dependencies: ["Common", "Persistence"]
+        ),
+        .testTarget(name: "MoviesModuleTests",
+                    dependencies: ["Common", "MoviesModule"]),
+    ]
 )

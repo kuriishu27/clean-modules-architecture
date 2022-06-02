@@ -12,8 +12,8 @@ final class MoviesQueriesItemCell: UITableViewCell {
     static let reuseIdentifier = String(describing: MoviesQueriesItemCell.self)
 
     @IBOutlet private var titleLabel: UILabel!
-    
+
     func fill(with suggestion: MoviesQueryListItemViewModel) {
-        self.titleLabel.text = suggestion.query
+        titleLabel.text = suggestion.query
     }
 }

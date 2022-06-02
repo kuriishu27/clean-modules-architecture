@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct AccessibilityIdentifier {
+public enum AccessibilityIdentifier {
     public static let movieDetailsView = "AccessibilityIdentifierMovieDetailsView"
     public static let searchField = "AccessibilityIdentifierSearchMovies"
 }

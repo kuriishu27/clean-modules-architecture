@@ -7,14 +7,13 @@
 
 import UIKit
 
-protocol MoviesSearchFlowCoordinatorDependencies  {
+protocol MoviesSearchFlowCoordinatorDependencies {
     func makeMoviesListViewController(actions: MoviesListViewModelActions) -> MoviesListViewController
     func makeMoviesDetailsViewController(movie: Movie) -> UIViewController
     func makeMoviesQueriesSuggestionsListViewController(didSelect: @escaping MoviesQueryListViewModelDidSelectAction) -> UIViewController
 }
 
 public final class MoviesSearchFlowCoordinator {
-    
     private weak var navigationController: UINavigationController?
     private let dependencies: MoviesSearchFlowCoordinatorDependencies
 
@@ -22,12 +21,13 @@ public final class MoviesSearchFlowCoordinator {
     private weak var moviesQueriesSuggestionsVC: UIViewController?
 
     init(navigationController: UINavigationController,
-         dependencies: MoviesSearchFlowCoordinatorDependencies) {
+         dependencies: MoviesSearchFlowCoordinatorDependencies)
+    {
         self.navigationController = navigationController
         self.dependencies = dependencies
     }
-    
-	public func start() {
+
+    public func start() {
         // Note: here we keep strong reference with actions, this way this flow do not need to be strong referenced
         let actions = MoviesListViewModelActions(showMovieDetails: showMovieDetails,
                                                  showMovieQueriesSuggestions: showMovieQueriesSuggestions,
@@ -45,7 +45,7 @@ public final class MoviesSearchFlowCoordinator {
 
     private func showMovieQueriesSuggestions(didSelect: @escaping (MovieQuery) -> Void) {
         guard let moviesListViewController = moviesListVC, moviesQueriesSuggestionsVC == nil,
-            let container = moviesListViewController.suggestionsListContainer else { return }
+              let container = moviesListViewController.suggestionsListContainer else { return }
 
         let vc = dependencies.makeMoviesQueriesSuggestionsListViewController(didSelect: didSelect)
 
