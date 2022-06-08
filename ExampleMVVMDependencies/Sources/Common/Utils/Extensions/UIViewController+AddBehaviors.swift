@@ -20,15 +20,16 @@ public protocol ViewControllerLifecycleBehavior {
     func viewWillLayoutSubviews(viewController: UIViewController)
     func viewDidLayoutSubviews(viewController: UIViewController)
 }
+
 // Default implementations
 public extension ViewControllerLifecycleBehavior {
-    func viewDidLoad(viewController: UIViewController) {}
-    func viewWillAppear(viewController: UIViewController) {}
-    func viewDidAppear(viewController: UIViewController) {}
-    func viewWillDisappear(viewController: UIViewController) {}
-    func viewDidDisappear(viewController: UIViewController) {}
-    func viewWillLayoutSubviews(viewController: UIViewController) {}
-    func viewDidLayoutSubviews(viewController: UIViewController) {}
+    func viewDidLoad(viewController _: UIViewController) {}
+    func viewWillAppear(viewController _: UIViewController) {}
+    func viewDidAppear(viewController _: UIViewController) {}
+    func viewWillDisappear(viewController _: UIViewController) {}
+    func viewDidDisappear(viewController _: UIViewController) {}
+    func viewWillLayoutSubviews(viewController _: UIViewController) {}
+    func viewDidLayoutSubviews(viewController _: UIViewController) {}
 }
 
 public extension UIViewController {
@@ -59,7 +60,8 @@ public extension UIViewController {
             super.init(nibName: nil, bundle: nil)
         }
 
-        required init?(coder aDecoder: NSCoder) {
+        @available(*, unavailable)
+        required init?(coder _: NSCoder) {
             fatalError("init(coder:) has not been implemented")
         }
 

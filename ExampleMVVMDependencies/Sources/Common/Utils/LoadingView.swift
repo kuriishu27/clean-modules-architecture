@@ -8,7 +8,6 @@
 import UIKit
 
 public class LoadingView {
-
     internal static var spinner: UIActivityIndicatorView?
 
     public static func show() {

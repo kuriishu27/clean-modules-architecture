@@ -5,17 +5,16 @@
 //  Created by Oleh Kudinov on 01.10.18.
 //
 
-import UIKit
 import Common
+import UIKit
 
 public final class MoviesListViewController: UIViewController, StoryboardInstantiable, Alertable {
-    
     @IBOutlet private var contentView: UIView!
     @IBOutlet private var moviesListContainer: UIView!
     @IBOutlet private(set) var suggestionsListContainer: UIView!
     @IBOutlet private var searchBarContainer: UIView!
     @IBOutlet private var emptyDataLabel: UILabel!
-    
+
     private var viewModel: MoviesListViewModel!
     private var posterImagesRepository: PosterImagesRepository?
 
@@ -25,18 +24,19 @@ public final class MoviesListViewController: UIViewController, StoryboardInstant
     // MARK: - Lifecycle
 
     static func create(with viewModel: MoviesListViewModel,
-                       posterImagesRepository: PosterImagesRepository?) -> MoviesListViewController {
-			let view = UIStoryboard(
-				name: "MoviesListViewController",
-				bundle: .module
-			).instantiateInitialViewController() as! MoviesListViewController
-			
+                       posterImagesRepository: PosterImagesRepository?) -> MoviesListViewController
+    {
+        let view = UIStoryboard(
+            name: "MoviesListViewController",
+            bundle: .module
+        ).instantiateInitialViewController() as! MoviesListViewController
+
         view.viewModel = viewModel
         view.posterImagesRepository = posterImagesRepository
         return view
     }
 
-	public override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
         setupBehaviours()
@@ -51,14 +51,15 @@ public final class MoviesListViewController: UIViewController, StoryboardInstant
         viewModel.error.observe(on: self) { [weak self] in self?.showError($0) }
     }
 
-	public override func viewWillDisappear(_ animated: Bool) {
+    override public func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         searchController.isActive = false
     }
 
-	public override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    override public func prepare(for segue: UIStoryboardSegue, sender _: Any?) {
         if segue.identifier == String(describing: MoviesListTableViewController.self),
-            let destinationVC = segue.destination as? MoviesListTableViewController {
+           let destinationVC = segue.destination as? MoviesListTableViewController
+        {
             moviesTableViewController = destinationVC
             moviesTableViewController?.viewModel = viewModel
             moviesTableViewController?.posterImagesRepository = posterImagesRepository
@@ -141,27 +142,27 @@ extension MoviesListViewController {
 }
 
 extension MoviesListViewController: UISearchBarDelegate {
-	public func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+    public func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let searchText = searchBar.text, !searchText.isEmpty else { return }
         searchController.isActive = false
         viewModel.didSearch(query: searchText)
     }
 
-	public func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+    public func searchBarCancelButtonClicked(_: UISearchBar) {
         viewModel.didCancelSearch()
     }
 }
 
 extension MoviesListViewController: UISearchControllerDelegate {
-    public func willPresentSearchController(_ searchController: UISearchController) {
+    public func willPresentSearchController(_: UISearchController) {
         updateQueriesSuggestions()
     }
 
-    public func willDismissSearchController(_ searchController: UISearchController) {
+    public func willDismissSearchController(_: UISearchController) {
         updateQueriesSuggestions()
     }
 
-    public func didDismissSearchController(_ searchController: UISearchController) {
+    public func didDismissSearchController(_: UISearchController) {
         updateQueriesSuggestions()
     }
 }

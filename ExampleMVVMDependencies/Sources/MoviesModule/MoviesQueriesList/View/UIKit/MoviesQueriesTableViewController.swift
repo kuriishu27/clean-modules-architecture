@@ -5,32 +5,31 @@
 //  Created by Oleh on 03.10.18.
 //
 
-import UIKit
 import Common
+import UIKit
 
 public final class MoviesQueriesTableViewController: UITableViewController {
-    
     private var viewModel: MoviesQueryListViewModel!
 
     // MARK: - Lifecycle
 
     static func create(with viewModel: MoviesQueryListViewModel) -> MoviesQueriesTableViewController {
-			let view = UIStoryboard(name: "MoviesQueriesTableViewController", bundle: .module).instantiateViewController(withIdentifier: "MoviesQueriesTableViewController") as! MoviesQueriesTableViewController
+        let view = UIStoryboard(name: "MoviesQueriesTableViewController", bundle: .module).instantiateViewController(withIdentifier: "MoviesQueriesTableViewController") as! MoviesQueriesTableViewController
         view.viewModel = viewModel
         return view
     }
-    
-	public override func viewDidLoad() {
+
+    override public func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
         bind(to: viewModel)
     }
-    
+
     private func bind(to viewModel: MoviesQueryListViewModel) {
         viewModel.items.observe(on: self) { [weak self] _ in self?.tableView.reloadData() }
     }
-    
-	public override func viewWillAppear(_ animated: Bool) {
+
+    override public func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
         viewModel.viewWillAppear()
@@ -48,13 +47,12 @@ public final class MoviesQueriesTableViewController: UITableViewController {
 
 // MARK: - UITableViewDataSource, UITableViewDelegate
 
-extension MoviesQueriesTableViewController {
-    
-	public override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+public extension MoviesQueriesTableViewController {
+    override func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
         return viewModel.items.value.count
     }
-    
-	public override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: MoviesQueriesItemCell.reuseIdentifier, for: indexPath) as? MoviesQueriesItemCell else {
             assertionFailure("Cannot dequeue reusable cell \(MoviesQueriesItemCell.self) with reuseIdentifier: \(MoviesQueriesItemCell.reuseIdentifier)")
             return UITableViewCell()
@@ -63,8 +61,8 @@ extension MoviesQueriesTableViewController {
 
         return cell
     }
-    
-	public override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
         viewModel.didSelect(item: viewModel.items.value[indexPath.row])
     }

@@ -5,8 +5,8 @@
 //  Created by Oleh Kudinov on 05/04/2020.
 //
 
-import Foundation
 import CoreData
+import Foundation
 import Persistence
 
 extension MoviesResponseEntity {

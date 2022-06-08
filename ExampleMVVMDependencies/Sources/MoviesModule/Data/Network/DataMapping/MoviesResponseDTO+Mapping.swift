@@ -16,6 +16,7 @@ public struct MoviesResponseDTO: Decodable {
         case totalPages = "total_pages"
         case movies = "results"
     }
+
     let page: Int
     let totalPages: Int
     let movies: [MovieDTO]
@@ -31,10 +32,12 @@ public extension MoviesResponseDTO {
             case overview
             case releaseDate = "release_date"
         }
-			public enum GenreDTO: String, Decodable {
+
+        public enum GenreDTO: String, Decodable {
             case adventure
             case scienceFiction = "science_fiction"
         }
+
         let id: Int
         let title: String?
         let genre: GenreDTO?

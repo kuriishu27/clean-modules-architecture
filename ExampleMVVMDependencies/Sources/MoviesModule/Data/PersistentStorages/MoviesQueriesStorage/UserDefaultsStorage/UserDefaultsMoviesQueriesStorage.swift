@@ -11,7 +11,7 @@ final class UserDefaultsMoviesQueriesStorage {
     private let maxStorageLimit: Int
     private let recentsMoviesQueriesKey = "recentsMoviesQueries"
     private var userDefaults: UserDefaults
-    
+
     init(maxStorageLimit: Int, userDefaults: UserDefaults = UserDefaults.standard) {
         self.maxStorageLimit = maxStorageLimit
         self.userDefaults = userDefaults
@@ -36,13 +36,12 @@ final class UserDefaultsMoviesQueriesStorage {
 }
 
 extension UserDefaultsMoviesQueriesStorage: MoviesQueriesStorage {
-
     func fetchRecentsQueries(maxCount: Int, completion: @escaping (Result<[MovieQuery], Error>) -> Void) {
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
             guard let self = self else { return }
 
             var queries = self.fetchMoviesQuries()
-            queries = queries.count < self.maxStorageLimit ? queries : Array(queries[0..<maxCount])
+            queries = queries.count < self.maxStorageLimit ? queries : Array(queries[0 ..< maxCount])
             completion(.success(queries))
         }
     }
@@ -61,10 +60,9 @@ extension UserDefaultsMoviesQueriesStorage: MoviesQueriesStorage {
     }
 }
 
-
 // MARK: - Private
-extension UserDefaultsMoviesQueriesStorage {
 
+extension UserDefaultsMoviesQueriesStorage {
     private func cleanUpQueries(for query: MovieQuery, in queries: inout [MovieQuery]) {
         removeDuplicates(for: query, in: &queries)
         removeQueries(limit: maxStorageLimit - 1, in: &queries)
@@ -75,6 +73,6 @@ extension UserDefaultsMoviesQueriesStorage {
     }
 
     private func removeQueries(limit: Int, in queries: inout [MovieQuery]) {
-        queries = queries.count <= limit ? queries : Array(queries[0..<limit])
+        queries = queries.count <= limit ? queries : Array(queries[0 ..< limit])
     }
 }

@@ -8,8 +8,7 @@
 import UIKit
 
 public extension UITableViewController {
-
-    public func makeActivityIndicator(size: CGSize) -> UIActivityIndicatorView {
+    func makeActivityIndicator(size: CGSize) -> UIActivityIndicatorView {
         let style: UIActivityIndicatorView.Style = .medium
 
         let activityIndicator = UIActivityIndicatorView(style: style)

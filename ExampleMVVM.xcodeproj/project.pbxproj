@@ -163,7 +163,6 @@
 		1FA533D5201EF29600747E55 /* Application */ = {
 			isa = PBXGroup;
 			children = (
-				B9B20BB02847B52F0066A566 /* DIContainer */,
 				B9B20BAF2847B52F0066A566 /* AppConfigurations.swift */,
 				B9B20BB22847B52F0066A566 /* AppFlowCoordinator.swift */,
 				B9B20BB12847B52F0066A566 /* AppDIContainer.swift */,
@@ -178,13 +177,6 @@
 			children = (
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		B9B20BB02847B52F0066A566 /* DIContainer */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = DIContainer;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -212,6 +204,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1FA533A6201E1FDE00747E55 /* Build configuration list for PBXNativeTarget "ExampleMVVM" */;
 			buildPhases = (
+				47ECD1E92849439600B5FEDE /* Swiftformat */,
 				1FA53385201E1FDE00747E55 /* Sources */,
 				1FA53386201E1FDE00747E55 /* Frameworks */,
 				1FA53387201E1FDE00747E55 /* Resources */,
@@ -320,6 +313,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		47ECD1E92849439600B5FEDE /* Swiftformat */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = Swiftformat;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftformat >/dev/null; then\n  swiftformat .\nelse\n  echo \"warning: SwiftFormat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		1F02DE2E22F8507500E40C3A /* Sources */ = {

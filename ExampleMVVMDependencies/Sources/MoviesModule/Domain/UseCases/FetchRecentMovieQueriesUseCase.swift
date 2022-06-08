@@ -5,16 +5,16 @@
 //  Created by Oleh Kudinov on 11.08.19.
 //
 
-import Foundation
 import Common
+import Foundation
 
 // This is another option to create Use Case using more generic way
 final class FetchRecentMovieQueriesUseCase: UseCase {
-
     struct RequestValue {
         let maxCount: Int
     }
-    typealias ResultValue = (Result<[MovieQuery], Error>)
+
+    typealias ResultValue = Result<[MovieQuery], Error>
 
     private let requestValue: RequestValue
     private let completion: (ResultValue) -> Void
@@ -22,15 +22,14 @@ final class FetchRecentMovieQueriesUseCase: UseCase {
 
     init(requestValue: RequestValue,
          completion: @escaping (ResultValue) -> Void,
-         moviesQueriesRepository: MoviesQueriesRepository) {
-
+         moviesQueriesRepository: MoviesQueriesRepository)
+    {
         self.requestValue = requestValue
         self.completion = completion
         self.moviesQueriesRepository = moviesQueriesRepository
     }
-    
-	public func start() -> Cancellable? {
 
+    public func start() -> Cancellable? {
         moviesQueriesRepository.fetchRecentsQueries(maxCount: requestValue.maxCount, completion: completion)
         return nil
     }

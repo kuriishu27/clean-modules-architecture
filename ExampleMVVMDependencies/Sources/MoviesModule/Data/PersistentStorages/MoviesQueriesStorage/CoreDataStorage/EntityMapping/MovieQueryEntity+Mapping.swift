@@ -5,8 +5,8 @@
 //  Created by Oleh Kudinov on 16.08.19.
 //
 
-import Foundation
 import CoreData
+import Foundation
 import Persistence
 
 public extension MovieQueryEntity {
